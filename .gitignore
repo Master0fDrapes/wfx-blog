@@ -7,7 +7,6 @@
 # you can delete this whole section/until Configuration.
 /license.txt
 /readme.html
-/wp-*.php
 /xmlrpc.php
 
 # Configuration
