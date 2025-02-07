@@ -22,6 +22,7 @@ wp-config.php
 *.log
 
 .DS_Store
+.idea
 
 # htaccess
 /.htaccess
