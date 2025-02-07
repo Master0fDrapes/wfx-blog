@@ -305,3 +305,34 @@ function convert_cats_to_radio(){
 }
 add_action("admin_footer-post.php", 'convert_cats_to_radio');
 add_action("admin_footer-post-new.php", 'convert_cats_to_radio');
+
+/**
+ *************************************
+ *
+ * =Load More post return fucntions
+ *
+ *************************************
+ */
+function load_more_posts() {
+  $paged = $_POST['page'];
+  $args = array(
+    'post_type' => 'post',
+    'posts_per_page' => 1,
+    'paged' => $paged,
+    'order' => 'ASC',
+  );
+  $query = new WP_Query($args);
+
+  if($query->have_posts()) :
+    while($query->have_posts()) : $query->the_post(); ?>
+      <div class="post">
+        <h2><?php the_title(); ?></h2>
+        <div><?php the_excerpt(); ?></div>
+      </div>
+    <?php endwhile;
+    wp_reset_postdata();
+  endif;
+  die();
+}
+add_action('wp_ajax_load_more', 'load_more_posts');
+add_action('wp_ajax_nopriv_load_more', 'load_more_posts');

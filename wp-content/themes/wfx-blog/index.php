@@ -60,6 +60,7 @@
 	<section class="blog_posts_area">
 		<div class="container">
 			<h2 class="blog_page_heading">All Blogs</h2>
+
 			<div class="blog_tab_buttons">
 				<div class="row justify-content-center">
 					<div class="col-lg-8">
@@ -74,9 +75,10 @@
 				</div>
 			</div>
 
-			<!-- Blog Cards -->
 			<div class="blog_posts_cards">
 				<div class="blog_rows">
+
+					<!-- Blog Card -->
 					<div class="blog-content">
 						<div class="col-lg-4 col-md-6 mb-4 c-mb-20">
 							<div class="card blog_cards">
@@ -89,18 +91,38 @@
 							</div>
 						</div>
 					</div>
+					<!-- Blog Card Ends -->
 
 				</div>
 
 				<!-- Load More Button -->
 				<div class="text-center mt-4">
-					<button class="trans_csa_button read_moresm_btn load_articles">Load More
-						Articles
-					</button>
+					<button class="trans_csa_button read_moresm_btn load_articles">Load More Articles</button>
 				</div>
+
 			</div>
 		</div>
 	</section>
+	<?php
+    $args = array(
+      'post_type' => 'post',
+      'posts_per_page' => 1,
+      'order' => 'ASC',
+    );
+    $query = new WP_Query($args);
+  ?>
+
+  <?php if($query->have_posts()) : ?>
+    <?php while($query->have_posts()) : $query->the_post();?>
+      <div class="post" id="post-container">
+        <h2><?php the_title(); ?></h2>
+        <div><?php the_excerpt(); ?></div>
+      </div>
+    <?php endwhile; wp_reset_postdata(); ?>
+  <?php endif; ?>
+	<?php if ($query->max_num_pages > 1) : ?>
+		<div id="load-more" data-max-pages="<?php echo $query->max_num_pages; ?>">Load More</div>
+	<?php endif; ?>
 
 	<section class="subscribe_area">
 		<div class="container">
