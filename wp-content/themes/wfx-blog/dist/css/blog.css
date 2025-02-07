@@ -1,0 +1,162 @@
+.demo_btn {
+    margin-left: 0;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    max-width: 218px;
+    width: 100%;
+    height: 52px;
+}
+
+.blog_posts_area {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.blog_tab_btns {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 15px;
+}
+
+.c-mb-20 {
+    margin-bottom: 20px !important;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.trans_csa_button {
+    max-width: 249px;
+    width: 100%;
+    height: 52px;
+    font-size: 18px !important;
+    line-height: 24px;
+    font-weight: 700 !important;
+    padding: 0 !important;
+}
+
+.subscribe_area {
+    padding: 70.5px 0;
+}
+
+.subscribe_area .container {
+    max-width: 1000px;
+}
+
+.subscribe_area .text-end {
+    padding-right: 30px !important;
+}
+
+.subs_heading {
+    line-height: 50px;
+    margin-bottom: 20px;
+}
+
+.subscribe_area .sub_pera {
+    font-size: 18px;
+    line-height: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+
+.card-body {
+    padding: 20px 0 0;
+}
+
+.blog-content {
+    display: flex;
+}
+
+.blog-content.active {
+    display: flex;
+}
+
+.blog_posts_cards .row {
+    margin: 0 -10px !important;
+}
+
+.blog_posts_cards .row [class*="col-"] {
+    padding: 0 10px !important;
+}
+
+
+@media(max-width : 1200px) {
+    .subscribe_area .container {
+        padding: 0;
+    }
+}
+
+@media(max-width : 991px) {
+    .subscribe_area .text-end {
+        display: none;
+    }
+
+    .subscribe_area .container {
+        padding: 0 20px;
+    }
+
+    .subscribe_area {
+        padding: 20px 0;
+    }
+
+    .subscribe_area .col-lg-8 {
+        padding: 0 !important;
+    }
+
+    .blog_posts_cards .c-mb-20 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .blog_posts_area {
+        padding: 50px 0;
+    }
+
+    .blog_tab_btns {
+        margin: 20px 0;
+    }
+
+    .demo_sm_btn {
+        max-width: 134px;
+        font-size: 14px;
+        height: 32px;
+    }
+
+    .subs_btn {
+        max-width: 100%;
+    }
+
+    .subs_email_input {
+        padding: 17px 10px;
+    }
+
+    .subs_heading {
+        font-size: 28px;
+        line-height: 38px;
+        font-weight: 600;
+        color: #242733;
+        margin-bottom: 16px;
+    }
+
+    .subscribe_area .sub_pera {
+        font-size: 16px !important;
+        line-height: 22px;
+        margin-bottom: 16px;
+    }
+}
+
+@media(max-width : 767px) {
+    #blogContainer .card.blog_cards {
+        margin-right: 0px;
+    }
+    .subscribe_area .subs_btn{
+        height: 52px !important;
+        margin-top: 20px;
+        margin-left: 0;
+    }
+
+}
