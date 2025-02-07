@@ -18,31 +18,37 @@
 ?>
 <?php
   $args = array(
-    'post_type' => 'currently_hirings',
-    'posts_per_page' => -1,
+    'post_type' => 'post',
+    'posts_per_page' => 1,
     'order' => 'ASC',
+		'tax_query' => array(
+      array(
+        'taxonomy' => 'category',
+        'terms' => 'featured-blog',
+        'field' => 'slug',
+        'operator' => 'IN',
+    	),
+    )
   );
   $query = new WP_Query($args);
 ?>
 
 <?php if($query->have_posts()) : ?>
   <?php while($query->have_posts()) : $query->the_post();?>
-		<?php echo get_the_ID(); ?>
 		<section class="blog_header_area hide_for_sm">
 			<div class="container">
 				<div class="b_header_content">
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="b_content">
-								<h6>Featured Blog</h6>
-								<h1>Understand the concept of Fashion PLM systems.</h1>
-								<p>Explore the essentials of Fashion PLM systems and discover how they streamline the design
-									and production processes in the fashion industry.</p>
-								<button class="btn demo_btn demo_sm_btn px-5">Read More</button>
+								<h6><?php echo getTermsNameInArray(get_the_ID(), 'category')[0];  ?></h6>
+								<h1><?php echo get_the_title(get_the_ID()); ?></h1>
+								<p><?php echo get_the_excerpt(get_the_ID()); ?></p>
+								<a href="<?php echo get_the_permalink(get_the_ID()); ?>" class="btn demo_btn demo_sm_btn px-5">Read More</a>
 							</div>
 						</div>
 						<div class="col-lg-6">
-							<img src="<?php echo $gdir; ?>/img/header-image-hero.png" class="w-100" alt="Fashion PLM Systems">
+							<img src="<?php echo get_the_post_thumbnail_url(get_the_ID()) ?>" class="w-100" alt="<?php echo get_the_title(get_the_ID()); ?>">
 						</div>
 					</div>
 				</div>
