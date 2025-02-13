@@ -325,10 +325,16 @@ function load_more_posts() {
 
   if($query->have_posts()) :
     while($query->have_posts()) : $query->the_post(); ?>
-      <div class="post">
-        <h2><?php the_title(); ?></h2>
-        <div><?php the_excerpt(); ?></div>
-      </div>
+      <div class="col-lg-4 col-md-6 mb-4 c-mb-20">
+				<div class="card blog_cards">
+					<img src="<?php echo get_the_post_thumbnail_url() ?>" class="card-img-top" alt="" loading="lazy">
+					<div class="card-body">
+						<h5 class="card-title blog_titles"><?php echo get_the_title(); ?></h5>
+						<p class="blog_description"><?php echo get_the_excerpt(); ?></p>
+						<a href="<?php echo get_the_permalink(); ?>" class="link blog_link">Read More</a>
+					</div>
+				</div>
+			</div>
     <?php endwhile;
     wp_reset_postdata();
   endif;
@@ -336,3 +342,43 @@ function load_more_posts() {
 }
 add_action('wp_ajax_load_more', 'load_more_posts');
 add_action('wp_ajax_nopriv_load_more', 'load_more_posts');
+
+
+function filter_posts() {
+  $category = isset($_POST['category']) ? $_POST['category'] : '';
+
+  $args = array(
+    'post_type'      => 'post',
+    'posts_per_page' => -1, // Show all posts
+    'order'          => 'ASC',
+  );
+
+  if ($category !== 'all' && !empty($category)) {
+    $args['cat'] = $category;
+  }
+
+  $query = new WP_Query($args);
+
+  if ($query->have_posts()) :
+    while ($query->have_posts()) : $query->the_post(); ?>
+			<div class="col-lg-4 col-md-6 mb-4 c-mb-20">
+				<div class="card blog_cards">
+					<img src="<?php echo get_the_post_thumbnail_url() ?>" class="card-img-top" alt="" loading="lazy">
+					<div class="card-body">
+						<h5 class="card-title blog_titles"><?php echo get_the_title(); ?></h5>
+						<p class="blog_description"><?php echo get_the_excerpt(); ?></p>
+						<a href="<?php echo get_the_permalink(); ?>" class="link blog_link">Read More</a>
+					</div>
+				</div>
+			</div>
+    <?php endwhile;
+    wp_reset_postdata();
+  else :
+    echo '<p>No posts found.</p>';
+  endif;
+
+  die();
+}
+
+add_action('wp_ajax_filter_posts', 'filter_posts');
+add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');

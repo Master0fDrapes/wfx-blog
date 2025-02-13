@@ -10,7 +10,7 @@
  */
 $t_options = get_option('tp_opt');
 ?>
-		<div id="footer"></div>
+	<div id="footer"></div>
 		<?php wp_footer(); ?>
 		<script>
 			jQuery(document).ready(function($){
@@ -42,6 +42,32 @@ $t_options = get_option('tp_opt');
 				});
 			});
 
+		</script>
+		<script>
+			jQuery(document).ready(function($) {
+				$('.filter-btn, .blog_tab_btns button').click(function() {
+					var categoryId = $(this).data('category') || 'all';
+
+					// Remove 'active' class from all buttons and add it to the clicked one
+					$('.filter-btn, .blog_tab_btns button').removeClass('active');
+					$(this).addClass('active');
+
+					$.ajax({
+						url: '<?php echo admin_url("admin-ajax.php"); ?>',
+						type: 'POST',
+						data: {
+							action: 'filter_posts',
+							category: categoryId
+						},
+						beforeSend: function() {
+							$('#post-container').html('<p>Loading...</p>');
+						},
+						success: function(response) {
+							$('#post-container').html(response);
+						}
+					});
+				});
+			});
 		</script>
 	</body>
 </html>
