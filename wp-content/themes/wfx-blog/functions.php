@@ -263,6 +263,8 @@ function getTermsNameInArray( $post_id, $taxonomy )
   return !empty($terms) && !is_wp_error($terms) ? wp_list_pluck($terms, 'name') : [];
 }
 
+add_filter('wpcf7_autop_or_not', '__return_false');
+
 /**
  ***********************************************************
  *

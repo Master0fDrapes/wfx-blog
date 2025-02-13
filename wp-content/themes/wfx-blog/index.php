@@ -132,10 +132,7 @@
 				<div class="col-lg-8">
 					<h2 class="subs_heading">Get the latest on fashion tech! Subscribe to our newsletter</h2>
 					<p class="sub_pera">By subscribing to WFX's newsletter, you can expect to receive:</p>
-					<form class="d-md-flex">
-						<input type="email" name="subs_email" placeholder="Business Email" class="subs_email_input" required>
-						<button class="btn subs_btn mb-md-0">Subscribe</button>
-					</form>
+					<?php echo do_shortcode('[contact-form-7 id="0da0fd7" html_class="d-md-flex" title="Subscribe"]'); ?>
 				</div>
 			</div>
 		</div>
