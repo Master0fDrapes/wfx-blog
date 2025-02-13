@@ -32,9 +32,9 @@
 		);
 		$query = new WP_Query($args);
 	?>
-
 	<?php if($query->have_posts()) : ?>
 		<?php while($query->have_posts()) : $query->the_post();?>
+			<?php $featuredPost = get_the_ID(); ?>
 			<section class="blog_header_area hide_for_sm">
 				<div class="container">
 					<div class="b_header_content">
@@ -66,7 +66,11 @@
 					<div class="col-lg-8">
 						<div class="blog_tab_btns d-flex justify-content-center">
 							<button class="active" data-tab="all"><span>All</span></button>
-							<?php $categories = get_categories();
+							<?php
+								$excluded_category = 6; // Replace with the actual "Featured Blog" category ID
+								$categories = get_categories(array(
+									'exclude' => $excluded_category
+								));
 								foreach ($categories as $category) { ?>
 									<button class="filter-btn" data-category="<?php echo $category->term_id; ?>">
 										<span><?php echo $category->name; ?></span>
@@ -84,6 +88,7 @@
 							'post_type' => 'post',
 							'posts_per_page' => 1,
 							'order' => 'ASC',
+							'post__not_in' => array($featuredPost),
 						);
 						$query = new WP_Query($args);
 					?>

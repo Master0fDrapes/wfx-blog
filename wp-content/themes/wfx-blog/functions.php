@@ -315,11 +315,13 @@ add_action("admin_footer-post-new.php", 'convert_cats_to_radio');
  */
 function load_more_posts() {
   $paged = $_POST['page'];
+	$excluded_category = 6;
   $args = array(
     'post_type' => 'post',
     'posts_per_page' => 1,
     'paged' => $paged,
     'order' => 'ASC',
+		'category__not_in' => array($excluded_category),
   );
   $query = new WP_Query($args);
 
@@ -345,12 +347,14 @@ add_action('wp_ajax_nopriv_load_more', 'load_more_posts');
 
 
 function filter_posts() {
-  $category = isset($_POST['category']) ? $_POST['category'] : '';
+	$category = isset($_POST['category']) ? $_POST['category'] : '';
+  $excluded_category = 6; // Replace with actual "Featured Blog" category ID
 
   $args = array(
     'post_type'      => 'post',
     'posts_per_page' => -1, // Show all posts
     'order'          => 'ASC',
+		'category__not_in' => array($excluded_category), // Exclude Featured Blog
   );
 
   if ($category !== 'all' && !empty($category)) {
