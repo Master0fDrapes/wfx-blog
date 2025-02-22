@@ -9,7 +9,7 @@
 function them_support()
 {
   add_theme_support('title-tag');
-  add_theme_support('post-thumbnails', array( 'post', 'page', '' ));
+  add_theme_support('post-thumbnails');
   add_theme_support('woocommerce');
 }
 
@@ -348,6 +348,14 @@ add_action('wp_ajax_load_more', 'load_more_posts');
 add_action('wp_ajax_nopriv_load_more', 'load_more_posts');
 
 
+/**
+ *************************************
+ *
+ * =Filter For Home page tabs
+ *
+ *************************************
+ */
+
 function filter_posts() {
 	$category = isset($_POST['category']) ? $_POST['category'] : '';
   $excluded_category = 6; // Replace with actual "Featured Blog" category ID
@@ -382,7 +390,6 @@ function filter_posts() {
   else :
     echo '<p>No posts found.</p>';
   endif;
-
   die();
 }
 

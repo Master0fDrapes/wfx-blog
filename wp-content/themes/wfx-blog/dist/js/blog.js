@@ -186,31 +186,3 @@ const blogs = [
     link: "#"
   }
 ];
-
-function renderBlogs() {
-  const blogContainer = document.getElementById('blogContainer');
-  const blogContainer2 = document.getElementById('blogContainer2');
-  const blogContainer3 = document.getElementById('blogContainer3');
-  const blogContainer4 = document.getElementById('blogContainer4');
-  const blogContainer5 = document.getElementById('blogContainer5');
-  blogs.forEach(blog => {
-    const blogCard = `
-      <div class="col-lg-4 col-md-6 mb-4 c-mb-20">
-        <div class="card blog_cards">
-          <img src="${blog.img}" class="card-img-top" alt="${blog.alt}" loading="lazy">
-          <div class="card-body">
-            <h5 class="card-title blog_titles">${blog.title}</h5>
-            <p class="blog_description">${blog.description}</p>
-            <a href="${blog.link}" class="link blog_link">Read More</a>
-          </div>
-        </div>
-      </div>`;
-    blogContainer.innerHTML += blogCard;
-    blogContainer2.innerHTML += blogCard;
-    blogContainer3.innerHTML += blogCard;
-    blogContainer4.innerHTML += blogCard;
-    blogContainer5.innerHTML += blogCard;
-  });
-}
-
-document.addEventListener('DOMContentLoaded', renderBlogs);

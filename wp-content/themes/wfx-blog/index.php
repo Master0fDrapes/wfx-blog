@@ -132,11 +132,47 @@
 				<div class="col-lg-8">
 					<h2 class="subs_heading">Get the latest on fashion tech! Subscribe to our newsletter</h2>
 					<p class="sub_pera">By subscribing to WFX's newsletter, you can expect to receive:</p>
-					<?php echo do_shortcode('[contact-form-7 id="0da0fd7" html_class="d-md-flex" title="Subscribe"]'); ?>
+					<div id="disableOnLoading">
+						<?php echo do_shortcode('[contact-form-7 id="0da0fd7" title="Subscribe"]'); ?>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let formContainer = document.querySelector("#disableOnLoading"); // Ensure ID matches
+    let submitButton = document.querySelector("#disableOnLoading .wpcf7-submit");
+
+    if (formContainer && submitButton) {
+      // Disable form when the submit button is clicked
+      submitButton.addEventListener("click", function () {
+        formContainer.style.pointerEvents = "none"; // Disable interactions
+        formContainer.style.opacity = "0.5"; // Reduce visibility
+      });
+
+      // Re-enable the form if validation fails
+      document.addEventListener("wpcf7invalid", function (event) {
+        if (event.target.closest("#disableOnLoading")) {
+          setTimeout(() => {
+            formContainer.style.pointerEvents = "auto";
+            formContainer.style.opacity = "1";
+          }, 100); // Slight delay for smoother UI
+        }
+      });
+
+      // Re-enable the form after successful submission (optional)
+      document.addEventListener("wpcf7mailsent", function (event) {
+        if (event.target.closest("#disableOnLoading")) {
+          setTimeout(() => {
+            formContainer.style.pointerEvents = "auto";
+            formContainer.style.opacity = "1";
+          }, 1000); // Optional delay before re-enabling
+        }
+      });
+    }
+  });
+</script>
 <?php
 	get_footer();

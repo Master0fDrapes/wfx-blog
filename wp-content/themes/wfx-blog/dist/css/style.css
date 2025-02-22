@@ -4112,3 +4112,12 @@ ul.erp_drop li:first-child {
         max-width: 90px !important;
     }
 }
+
+/*Added for wordpress only*/
+
+.wpcf7-spinner{
+    display: none;
+}
+.wpcf7 form .wpcf7-response-output{
+    margin: 1em 0.5em 1em;
+}

@@ -151,19 +151,6 @@ add_action('init', 'disable_core_block_supports_inline');
 
 
 
-function remove_wp_i18n_js_after() {
-    wp_deregister_script('wp-i18n');
-    wp_dequeue_script('wp-i18n');
-}
-add_action('wp_enqueue_scripts', 'remove_wp_i18n_js_after', 100);
-
-
-function remove_core_block_supports_inline_css() {
-    wp_dequeue_style('global-styles');
-    wp_deregister_style('global-styles');
-}
-add_action('wp_enqueue_scripts', 'remove_core_block_supports_inline_css', 100);
-
 
 function buffer_callback($buffer) {
     return preg_replace('/<style[^>]*>img:is\(\[sizes="auto" i\], \[sizes\^="auto," i\]\) {[^}]+}<\/style>/', '', $buffer);
