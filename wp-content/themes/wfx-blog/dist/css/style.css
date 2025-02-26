@@ -729,20 +729,17 @@ ul.erp_drop li:first-child {
 .book_demo_btn {
     background: linear-gradient(90deg, #00D1CF 0%, #0099C4 100%);
     color: #FFFFFF;
-    border: none;
-    padding: 7px 20px;
-    border-radius: 50px;
+    border: none !important;
+    padding: 15px 20px !important;
+    border-radius: 50px !important;
     cursor: pointer;
-    font-weight: 500;
     transition: background-color 0.3s ease;
-
-    box-shadow: 0 0.7px 3px #8B8B8B;
+    box-shadow: 0 0.7px 3px #8B8B8B !important;
     align-items: center;
-    margin-top: 10px;
-    margin-bottom: 8px;
+    margin-top: 10px !important;
+    margin-bottom: 8px !important;
     max-width: 216px;
-    width: 100%;
-    height: 52px;
+    width: 100% !important;
     font-weight: 700;
 }
 
@@ -2111,7 +2108,7 @@ ul.erp_drop li:first-child {
 }
 
 .blog_content_ads {
-    background: url('../img/blog_content_ads.png');
+    /*background: url('../img/blog_content_ads.png');*/
     border-radius: 15px;
     text-align: center;
     background-repeat: no-repeat;
@@ -2144,7 +2141,7 @@ ul.erp_drop li:first-child {
 }
 
 .innerblog_wallpaper {
-    background: url('../img/d_wallpaper_bg.png');
+    /*background: url('../img/d_wallpaper_bg.png');*/
     padding: 30px;
     text-align: center;
     border-radius: 20px;

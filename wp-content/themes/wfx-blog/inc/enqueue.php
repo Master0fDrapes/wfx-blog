@@ -8,6 +8,7 @@
 		wp_enqueue_style( 'bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css' );
 		wp_enqueue_style( 'main-css', get_stylesheet_directory_uri() . '/dist/css/style.css' );
 		wp_enqueue_style( 'blog-listing-css', get_stylesheet_directory_uri() . '/dist/css/blog.css' );
+		wp_enqueue_style( 'blog-details-css', get_stylesheet_directory_uri() . '/dist/css/blog-details.css' );
 	}
 
 	add_action( 'wp_enqueue_scripts', 'enqueue_style' );
@@ -19,6 +20,7 @@
 		wp_enqueue_script( 'bootstrap-js', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array(), false, true );
 		wp_enqueue_script( 'main-script-js', get_stylesheet_directory_uri() . '/dist/js/script.js', array(), false, true );
 		wp_enqueue_script( 'blog-js', get_stylesheet_directory_uri() . '/dist/js/blog.js', array(), false, true );
+		wp_enqueue_script( 'blog-details-js', get_stylesheet_directory_uri() . '/dist/js/blog-details.js', array(), false, true );
 	}
 
 	add_action( 'wp_enqueue_scripts', 'enqueue_js' );

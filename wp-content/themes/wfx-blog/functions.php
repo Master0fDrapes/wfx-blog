@@ -395,3 +395,110 @@ function filter_posts() {
 
 add_action('wp_ajax_filter_posts', 'filter_posts');
 add_action('wp_ajax_nopriv_filter_posts', 'filter_posts');
+
+
+/**
+ *********************************
+ *
+ * =Author Post type
+ *
+ *********************************
+*/
+	function author_fun() {
+
+		$labels = array(
+			'name'                  => _x( 'Authors', 'Post Type General Name', 'text_domain' ),
+			'singular_name'         => _x( 'Author', 'Post Type Singular Name', 'text_domain' ),
+			'menu_name'             => __( 'Authors', 'text_domain' ),
+			'name_admin_bar'        => __( 'Author', 'text_domain' ),
+			'archives'              => __( 'Author Archives', 'text_domain' ),
+			'attributes'            => __( 'Author Attributes', 'text_domain' ),
+			'parent_item_colon'     => __( 'Parent Author:', 'text_domain' ),
+			'all_items'             => __( 'All Authors', 'text_domain' ),
+			'add_new_item'          => __( 'Add New Author', 'text_domain' ),
+			'add_new'               => __( 'Add New', 'text_domain' ),
+			'new_item'              => __( 'New Author', 'text_domain' ),
+			'edit_item'             => __( 'Edit Author', 'text_domain' ),
+			'update_item'           => __( 'Update Author', 'text_domain' ),
+			'view_item'             => __( 'View Author', 'text_domain' ),
+			'view_items'            => __( 'View Authors', 'text_domain' ),
+			'search_items'          => __( 'Search Author', 'text_domain' ),
+			'not_found'             => __( 'Not found', 'text_domain' ),
+			'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),
+			'featured_image'        => __( 'Featured Image', 'text_domain' ),
+			'set_featured_image'    => __( 'Set featured image', 'text_domain' ),
+			'remove_featured_image' => __( 'Remove featured image', 'text_domain' ),
+			'use_featured_image'    => __( 'Use as featured image', 'text_domain' ),
+			'insert_into_item'      => __( 'Insert into Author', 'text_domain' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this Author', 'text_domain' ),
+			'items_list'            => __( 'Authors list', 'text_domain' ),
+			'items_list_navigation' => __( 'Authors list navigation', 'text_domain' ),
+			'filter_items_list'     => __( 'Filter Authors list', 'text_domain' ),
+		);
+		$args = array(
+			'label'                 => __( 'Author', 'text_domain' ),
+			'description'           => __( 'Author Description', 'text_domain' ),
+			'labels'                => $labels,
+			'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_ui'               => true,
+			'show_in_menu'          => true,
+			'menu_position'         => 25,
+			'menu_icon'             => 'dashicons-superhero',
+			'show_in_admin_bar'     => true,
+			'show_in_nav_menus'     => true,
+			'can_export'            => true,
+			'has_archive'           => true,
+			'exclude_from_search'   => false,
+			'publicly_queryable'    => true,
+			'capability_type'       => 'page',
+		);
+		register_post_type( 'authors', $args );
+
+	}
+	add_action( 'init', 'author_fun', 0 );
+
+
+	function acf_download_counter() {
+    if (isset($_GET['acf_file'])) {
+			$file_url = esc_url_raw($_GET['acf_file']);
+
+			// Create a unique key for each file based on the URL
+			$file_key = 'download_count_' . md5($file_url);
+
+			// Get and update the download count
+			$count = get_option($file_key, 0);
+			update_option($file_key, $count + 1);
+
+			// Redirect to the actual file
+			wp_redirect($file_url);
+			exit();
+    }
+	}
+	add_action('init', 'acf_download_counter');
+
+
+	function custom_wpcf7_redirect(){
+		if ( have_rows('blog_details') ) {
+			while ( have_rows('blog_details') ) {
+				the_row();
+
+				if ( get_row_layout() == 'download_with_form' ) {
+					$redirect_url = get_sub_field('add_the_download_file'); // Your ACF field
+
+					if ( $redirect_url ) {
+					?>
+						<script>
+							document.addEventListener('wpcf7mailsent', function (event) {
+								location.href = '<?php echo esc_url($redirect_url); ?>';
+							}, false);
+						</script>
+					<?php
+					}
+				}
+			}
+		}
+	}
+
+	add_action('wp_footer', 'custom_wpcf7_redirect');
