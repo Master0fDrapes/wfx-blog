@@ -89,7 +89,7 @@ global $gdir;
 									</div>
 
 								<?php elseif( get_row_layout() == 'subscription_form' ): ?>
-									<div class="subscribe_newsletter">
+									<div class="subscribe_newsletter" style="background: url(<?php echo get_sub_field('background_image')?>);">
 										<h4 class="bn_h5"><?php echo get_sub_field('top_heading') ?></h4>
 										<h2 class="bn_h2"><?php echo get_sub_field('main_heading') ?></h2>
 										<div class="blog_inner_form text-center">
@@ -97,13 +97,17 @@ global $gdir;
 											<div class="row">
 												<div class="col-lg-3 col-md-3 col-12"></div>
 												<div class="col-lg-6 col-md-6 col-12">
-													<form>
-														<input type="text" name="full_name" placeholder="Email Address*">
-														<button class="btn book_demo_btn blog_d_ads3">Subscribe</button>
-													</form>
+													<?php
+														$cfId = get_sub_field('add_form_code');
+														if (class_exists('WPCF7_ContactForm')) {
+															$form = WPCF7_ContactForm::get_instance($cfId);
+															echo $form->form_html();
+														}
+													?>
 												</div>
 												<div class="col-lg-3 col-md-3 col-12"></div>
 											</div>
+
 										</div>
 									</div>
 								<?php endif; ?>
@@ -114,48 +118,51 @@ global $gdir;
 					</div>
 
           <div class="post_footer_area  ">
-            <div class="social_media_sharing">
-              <span class="sharing_lable">Share article:</span>
-              <a href="#" class="sharing_links"><img src="../assets/img/x.svg"></a>
-              <a href="#" class="sharing_links"><img src="../assets/img/fbb.svg"></a>
-              <a href="#" class="sharing_links"><img src="../assets/img/linked.svg"></a>
-              <a href="#" class="sharing_links"><img src="../assets/img/copy.svg"></a>
-            </div>
-
+						<?php if (get_field('social_media_share',get_the_ID())) : ?>
+							<div class="social_media_sharing">
+								<span class="sharing_lable">Share article:</span>
+								<a href="https://twitter.com/intent/tweet?url=<?php echo get_the_permalink();?>&text=<?php echo get_the_title();?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/x.svg"></a>
+								<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink();?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/fbb.svg"></a>
+								<a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo get_the_permalink();?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/linked.svg"></a>
+								<a href="#" class="sharing_links"><img src="<?php echo $gdir; ?>/img/copy.svg"></a>
+							</div>
+						<?php endif; ?>
             <!-- About Admin Area -->
-            <div class="bpost_admin_area">
-              <div class="row">
-                <div class="col-lg-2 col-md-2 col-2 p-0 d-md-block d-none">
-                  <img src="../assets/img/admin.png" class="writer_admin">
-                </div>
-                <div class="col-lg-10 col-md-10 col-12 p-0">
-                  <div class=" d-md-none d-flex">
-                    <div>
-                      <img src="../assets/img/admin.png" class="writer_admin">
-                    </div>
+					<?php $authorID = get_field('blog_author_card'); ?>
+						<?php if($authorID){?>
+							<?php foreach($authorID as $author){ ?>
+								<div class="bpost_admin_area">
+									<div class="row">
+										<div class="col-lg-2 col-md-2 col-2 p-0 d-md-block d-none">
+											<img src="<?php echo get_the_post_thumbnail_url($author->ID); ?>" class="writer_admin">
+										</div>
+										<div class="col-lg-10 col-md-10 col-12 p-0">
+											<div class=" d-md-none d-flex">
+												<div>
+													<img src="<?php echo get_the_post_thumbnail_url($author->ID); ?>" class="writer_admin">
+												</div>
 
-                  </div>
-                  <div class="write_adming_details">
-                    <h5>Jane Doe</h5>
-                    <h6>Writer at WFX</h6>
-                    <p>Below are the five key stages of fashion product development, each of which contributes to the
-                      successful launch of a fashion item.
+											</div>
+											<div class="write_adming_details">
 
-                    </p>
-                    <p>
-                      Below are the five key stages of fashion product development, each of which contributes to the
-                      successful launch of a fashion.</p>
-                    <div class="social_media_sharing">
-                      <span class="sharing_lable">Share:</span>
-                      <a href="#" class="sharing_links"><img src="../assets/img/x.svg"></a>
-                      <a href="#" class="sharing_links"><img src="../assets/img/fbb.svg"></a>
-                      <a href="#" class="sharing_links"><img src="../assets/img/linked.svg"></a>
-                      <a href="#" class="sharing_links"><img src="../assets/img/copy.svg"></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+												<h5><?php echo get_the_title($author->ID); ?></h5>
+												<h6><?php get_field('author_designation',$author->ID) ?></h6>
+												<?php echo get_post_field('post_content', $author->ID); ?>
+												<div class="social_media_sharing">
+													<span class="sharing_lable">Author Social Media:</span>
+													<a href="<?php echo get_field('twitter_x',$author->ID) ?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/x.svg"></a>
+													<a href="<?php echo get_field('facebook',$author->ID) ?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/fbb.svg"></a>
+													<a href="<?php echo get_field('linkedin',$author->ID) ?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/linked.svg"></a>
+												</div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+							<?php	} ?>
+						<?php	} ?>
+
+
           </div>
 
         </div>
