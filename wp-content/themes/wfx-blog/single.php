@@ -121,9 +121,9 @@ global $gdir;
 						<?php if (get_field('social_media_share',get_the_ID())) : ?>
 							<div class="social_media_sharing">
 								<span class="sharing_lable">Share article:</span>
-								<a href="https://twitter.com/intent/tweet?url=<?php echo get_the_permalink();?>&text=<?php echo get_the_title();?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/x.svg"></a>
-								<a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink();?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/fbb.svg"></a>
-								<a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo get_the_permalink();?>" class="sharing_links"><img src="<?php echo $gdir; ?>/img/linked.svg"></a>
+								<a onclick="window.open(this.href,'_blank');return false;" href="https://twitter.com/intent/tweet?text=<?php echo get_the_title();?>&url=<?php echo get_the_permalink();?>&'&amp;via=" class="sharing_links" target="_blank"><img src="<?php echo $gdir; ?>/img/x.svg"></a>
+								<a onclick="window.open(this.href,'_blank');return false;" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink();?>" class="sharing_links" target="_blank"><img src="<?php echo $gdir; ?>/img/fbb.svg"></a>
+								<a onclick="window.open(this.href,'_blank');return false;" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo get_the_permalink();?>'&amp;title=<?php echo get_the_title();?>" class="sharing_links" target="_blank"><img src="<?php echo $gdir; ?>/img/linked.svg"></a>
 								<a href="#" class="sharing_links"><img src="<?php echo $gdir; ?>/img/copy.svg"><span class="tooltip">Copy</span></a>
 							</div>
 						<?php endif; ?>
