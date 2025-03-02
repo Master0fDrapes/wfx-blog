@@ -69,6 +69,27 @@ $t_options = get_option('tp_opt');
 				});
 			});
 		</script>
+		<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		document.querySelectorAll(".sharing_links").forEach(link => {
+			link.addEventListener("click", function (event) {
+				event.preventDefault();
+
+				const linkToCopy = this.getAttribute("data-link") || window.location.href;
+				navigator.clipboard.writeText(linkToCopy).then(() => {
+					const tooltip = this.querySelector(".tooltip");
+					tooltip.textContent = "Copied!";
+					tooltip.classList.add("active");
+
+					setTimeout(() => {
+						tooltip.textContent = "Copy";
+						tooltip.classList.remove("active");
+					}, 2000);
+				}).catch(err => console.error("Failed to copy: ", err));
+			});
+		});
+	});
+</script>
 	</body>
 </html>
 
