@@ -18,7 +18,7 @@ global $gdir;
 
         <div class="col-12 col-lg-11 mx-auto">
           <img src="<?php echo get_field('banner_image_desktop', get_the_ID()); ?>" class="hide_for_sm w-100 blog-banner-img">
-          <img src="<?php echo get_field('banner_image_mobile', get_the_ID()); ?>/img/sm_blog_img.png" class="hide_for_lg sm_blg_img blog-banner-img">
+          <img src="<?php echo get_field('banner_image_mobile', get_the_ID()); ?>" class="hide_for_lg sm_blg_img blog-banner-img">
         </div>
 
         <div class="col-lg-8 col-12 mx-auto">
