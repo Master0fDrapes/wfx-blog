@@ -351,7 +351,7 @@ function setupMenu(block) {
 
 // Fetch Common code
 // Load the header dynamically
-fetch("http://localhost/wfx-blog/wp-content/themes/wfx-blog/dist/assets/commonComponent/header/header.html")
+fetch("http://159.89.176.107/wp-content/themes/wfx-blog/dist/assets/commonComponent/header/header.html")
   .then((response) => response.text())
   .then((data) => {
     const getHeader = document.getElementById("header");
@@ -367,7 +367,7 @@ fetch("http://localhost/wfx-blog/wp-content/themes/wfx-blog/dist/assets/commonCo
   .catch((error) => console.error("Error loading the header:", error));
 
 // Load the footer dynamically
-fetch("http://localhost/wfx-blog/wp-content/themes/wfx-blog/dist/assets/commonComponent/footer/footer.html")
+fetch("http://159.89.176.107/wp-content/themes/wfx-blog/dist/assets/commonComponent/footer/footer.html")
   .then((response) => response.text())
   .then((data) => {
     const getFooter = document.getElementById("footer");
@@ -378,7 +378,7 @@ fetch("http://localhost/wfx-blog/wp-content/themes/wfx-blog/dist/assets/commonCo
   .catch((error) => console.error("Error loading the footer:", error));
 
 // Load the faq dynamically
-fetch("../assets/commonComponent/Faq/faq.html")
+fetch("http://159.89.176.107/wp-content/themes/wfx-blog/dist/assets/assets/commonComponent/Faq/faq.html")
   .then((response) => response.text())
   .then((data) => {
     const getFaq = document.getElementById("faq");
@@ -389,7 +389,7 @@ fetch("../assets/commonComponent/Faq/faq.html")
   .catch((error) => console.error("Error loading the faq:", error));
 
 // Load the customer Review dynamically
-fetch("../assets/commonComponent/customerReview/customerReview.html")
+fetch("http://159.89.176.107/wp-content/themes/wfx-blog/dist/assets/assets/commonComponent/customerReview/customerReview.html")
   .then((response) => response.text())
   .then((data) => {
     const getCustomerReview = document.getElementById("customerReview");
@@ -400,7 +400,7 @@ fetch("../assets/commonComponent/customerReview/customerReview.html")
   .catch((error) => console.error("Error loading the customer Review:", error));
 
 // Load the customer Review dynamically
-fetch("../assets/commonComponent/Banner/banner.html")
+fetch("http://159.89.176.107/wp-content/themes/wfx-blog/dist/assets/assets/commonComponent/Banner/banner.html")
   .then((response) => response.text())
   .then((data) => {
     const banner1 = document.getElementById("strugglingBanner");
